@@ -1,0 +1,24 @@
+
+c	java:S112€"FDefine and throw a dedicated exception instead of using a generic one.(­‘ñÒ8Ö¤Û¶Ï1
+h	java:S112÷"FDefine and throw a dedicated exception instead of using a generic one.(ôà„²şÿÿÿÿ8Ö¤Û¶Ï1
+i
+java:S1192å"FDefine a constant instead of duplicating this literal "list[" 8 times.(–­£¾ùÿÿÿÿ8×¤Û¶Ï1
+„
+java:S1488ı"fImmediately return this expression instead of assigning it to the temporary variable "csrfTokenValue".(¶ˆ¦ì8×¤Û¶Ï1
+O
+java:S1135B"2Complete the task associated to this TODO comment.(²˜ƒ¯8Œ¥Û¶Ï1
+F	java:S106D"+Replace this use of System.out by a logger.(‚š‰18Œ¥Û¶Ï1
+L	java:S106Q"+Replace this use of System.out by a logger.(İø½üÿÿÿÿ8¥Û¶Ï1
+{
+java:S2142{"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(üŸ´Â8¥Û¶Ï1
+L	java:S106y"+Replace this use of System.out by a logger.(®ıáëûÿÿÿÿ8¥Û¶Ï1
+U
+java:S1135‡"2Complete the task associated to this TODO comment.(ôğº¾ûÿÿÿÿ8¥Û¶Ï1
+J
+java:S3011±",This accessibility update should be removed.(˜ÂÓ˜8”¥Û¶Ï1
+n
+java:S3252²"PUse static access with "cn.hutool.core.text.CharSequenceUtil" for "toCamelCase".(ºàıĞ8•¥Û¶Ï1
+m
+java:S3252²"OUse static access with "cn.hutool.core.text.CharSequenceUtil" for "upperFirst".(ºàıĞ8•¥Û¶Ï1
+i
+java:S3252·"KUse static access with "cn.hutool.core.text.CharSequenceUtil" for "format".(Áïœ8•¥Û¶Ï1
