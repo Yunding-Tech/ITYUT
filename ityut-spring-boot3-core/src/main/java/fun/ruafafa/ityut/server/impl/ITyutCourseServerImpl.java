@@ -6,6 +6,9 @@ import fun.ruafafa.ityut.server.ITyutCourseServer;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 
+/**
+ * 课程与考试
+ */
 @Component
 public class ITyutCourseServerImpl implements ITyutCourseServer {
 

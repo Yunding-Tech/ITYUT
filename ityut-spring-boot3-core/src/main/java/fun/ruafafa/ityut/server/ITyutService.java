@@ -10,25 +10,11 @@ import java.util.List;
 
 public interface ITyutService {
 
-    /**
-     * 登录教务系统
-     * @param account
-     * @param password
-     * @return
-     */
-    boolean login(String account, String password);
-
-    String getExamSchedule();
     String getAcademicYearTerm();
 
     String getPjrsjPageListJson() throws Exception;
 
-    StudentInfo getStudentInfo() throws Throwable;
 
+    StudentInfo getStudentInfo(String account) throws Throwable;
 
-    String getTeachBuildingJson(@NotNull TyutCampus campus);
-
-    List<TeachBuilding> getTeachBuilding(@NotNull TyutCampus campus);
-
-    GradeReport getGradeReport();
 }

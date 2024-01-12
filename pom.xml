@@ -22,6 +22,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <forest.version>1.5.33</forest.version>
+        <fastjson.version>1.2.83</fastjson.version>
     </properties>
 
     <modules>
@@ -51,6 +52,16 @@
             <dependency>
                 <groupId>com.dtflys.forest</groupId>
                 <artifactId>forest-spring-boot3-starter</artifactId>
+                <version>${forest.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dtflys.forest</groupId>
+                <artifactId>forest-jakarta-xml</artifactId>
                 <version>${forest.version}</version>
             </dependency>
         </dependencies>

@@ -1,14 +1,13 @@
 package fun.ruafafa.ityut.client;
 
 import com.dtflys.forest.annotation.*;
+import fun.ruafafa.ityut.annotation.TmspUserApi;
 import fun.ruafafa.ityut.interceptor.CookieInterceptor;
 import fun.ruafafa.ityut.interceptor.TmspAddressSource;
 
 import java.util.Map;
 
-@Redirection(value = false)
-@Address(source = TmspAddressSource.class)
-@BaseRequest(interceptor = CookieInterceptor.class)
+@TmspUserApi
 public interface TmspCourseClient {
 
     @Post (
