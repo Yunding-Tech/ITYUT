@@ -10,11 +10,9 @@ public class LoginUser {
     private String password;
     private String code = " ";
     private Integer isautologin = 0;
-    private String account;
 
-    public LoginUser(String username, String password, String account) {
+    public LoginUser(String username, String password) {
         this.username = username;
         this.password = password;
-        this.account = account;
     }
 }

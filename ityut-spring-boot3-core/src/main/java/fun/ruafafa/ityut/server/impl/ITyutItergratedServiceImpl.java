@@ -20,7 +20,7 @@ public class ITyutItergratedServiceImpl implements fun.ruafafa.ityut.server.ITyu
     public String getTeachBuildingJson(String account, @NotNull TyutCampus campus) {
         String result;
         if (campus.equals(TyutCampus.ALL)) {
-            result = tmspItergratedClient.getTeachBuildings();
+            result = tmspItergratedClient.getTeachBuildings(account);
         } else {
             HashMap<String, String> map = new HashMap<>();
             map.put("xqh", campus.getId());
@@ -34,5 +34,12 @@ public class ITyutItergratedServiceImpl implements fun.ruafafa.ityut.server.ITyu
     public List<TeachBuilding> getTeachBuilding(String account, @NotNull TyutCampus campus) {
         String json = getTeachBuildingJson(account, campus);
         return JSON.parseArray(json, TeachBuilding.class);
+    }
+
+    @Override
+    public String getMajorClassTree(String account, String date) {
+        String majorClassTree = tmspItergratedClient.getMajorClassTree(account, date);
+        System.out.println(majorClassTree);
+        return null;
     }
 }

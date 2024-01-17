@@ -11,4 +11,6 @@ public interface ITyutItergratedService {
     String getTeachBuildingJson(@NotNull String account, @NotNull TyutCampus campus);
 
     List<TeachBuilding> getTeachBuilding(@NotNull String account, @NotNull TyutCampus campus);
+
+    String getMajorClassTree(String account, String date);
 }

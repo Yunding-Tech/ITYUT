@@ -38,10 +38,10 @@ public class StudentInfo {
     private String politicalStatus;
     @TmspConvert("年级")
     private String grade;
-    @TmspConvert("专业")
+    @TmspConvert("专业：")
     private String major;
     @TmspConvert("班级")
-    private String classNum;
+    private String classNumber;
     @TmspConvert("校内学籍")
     private String schoolRoll;
 }

@@ -12,9 +12,6 @@ public interface ITyutService {
 
     String getAcademicYearTerm();
 
-    String getPjrsjPageListJson() throws Exception;
 
-
-    StudentInfo getStudentInfo(String account) throws Throwable;
 
 }

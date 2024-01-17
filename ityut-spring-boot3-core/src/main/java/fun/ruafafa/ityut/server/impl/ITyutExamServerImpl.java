@@ -17,7 +17,7 @@ public class ITyutExamServerImpl implements ITyutExamServer {
      */
     @Override
     public String getExamSchedule(String account) {
-        ForestResponse<String> response = tmspExamClient.getExamSchedule(account, RequestConstant.PAGINATION);
+        ForestResponse<String> response = tmspExamClient.getExamSchedule(account, RequestConstant.PAGINATION_ARRAY);
         System.out.println(response.getContent());
         return null;
     }

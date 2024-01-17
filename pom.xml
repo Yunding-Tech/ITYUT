@@ -13,7 +13,7 @@
 
     <groupId>fun.ruafafa</groupId>
     <artifactId>ityut</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
     <packaging>pom</packaging>
 
@@ -23,6 +23,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <forest.version>1.5.33</forest.version>
         <fastjson.version>1.2.83</fastjson.version>
+        <hutool.version>5.8.25</hutool.version>
+        <jsoup.version>1.15.3</jsoup.version>
+        <protobuf-java.version>3.21.9</protobuf-java.version>
     </properties>
 
     <modules>
@@ -30,7 +33,6 @@
         <module>ityut-spring-boot3-autoconfigure</module>
         <module>ityut-spring-boot3-core</module>
     </modules>
-
 
     <dependencyManagement>
         <dependencies>
@@ -55,6 +57,11 @@
                 <version>${forest.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.google.protobuf</groupId>
+                <artifactId>protobuf-java</artifactId>
+                <version>${protobuf-java.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
@@ -63,6 +70,16 @@
                 <groupId>com.dtflys.forest</groupId>
                 <artifactId>forest-jakarta-xml</artifactId>
                 <version>${forest.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>${jsoup.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -1,13 +1,15 @@
 package fun.ruafafa.autoconfigure;
 
-import fun.ruafafa.constant.TmspManager;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import java.util.List;
 
 @ConfigurationProperties(prefix = "ityut")
 @RequiredArgsConstructor
+@Data
 public class ITyutProperties {
-
 
 
     /**
@@ -17,5 +19,5 @@ public class ITyutProperties {
      * @see <a href="http://jwc.ruafafa.fun">官方结点1 自行连接校园网</a>
      * @see <a href="http://jwc.ruafafa.fun">官方结点2 自行连接校园网</a>
      */
-    private final TmspManager teachingManagementTmspManager;
+    private List<String> customNodes;
 }

@@ -5,9 +5,8 @@ import com.dtflys.forest.http.ForestResponse;
 import fun.ruafafa.ityut.dto.LoginUser;
 import fun.ruafafa.ityut.interceptor.*;
 
-@Redirection(value = false)
 @Address(source = TmspAddressSource.class)
-@BaseRequest(interceptor = {HeaderInterceptor.class, ITyutUserLoginInterceptor.class})
+@BaseRequest(interceptor = {ITyutHeaderInterceptor.class, ITyutUserLoginInterceptor.class})
 public interface TmspLoginClient {
 
     /**

@@ -12,13 +12,12 @@ import fun.ruafafa.ityut.dto.LoginUser;
 import fun.ruafafa.ityut.manager.entity.ITyutUser;
 import jakarta.annotation.Resource;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
+
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-@Component()
-@DependsOn({"tmspLoginClient"})
+@Component
 public class ITyutUserManager {
     @Resource
     private TmspLoginClient tmspLoginClient;
@@ -29,17 +28,15 @@ public class ITyutUserManager {
         // 使用 公钥 RSA 加密 表单数据
         RSA rsa = SecureUtil.rsa(null, LoginConstant.LOGIN_PUB_KEY);
         String username = rsa.encryptBase64(account, KeyType.PublicKey);
-        LoginUser loginUser = new LoginUser(username, password, account);
+        LoginUser loginUser = new LoginUser(username, password);
         // 接口调用
         ForestResponse<?> res = tmspLoginClient.login(loginUser);
         ForestRequest req = res.getRequest();
         if (res.getStatusCode() == 200) {
             ITyutUser iTyutUser = updateUser(req, res, account, password);
             userMap.put(account, iTyutUser);
-            System.out.println(res.getContent());
         } else {
-            System.out.println(res.getContent());
-            throw new RuntimeException("登录失败, 请检查账号密码是否正确");
+            throw new RuntimeException("登录失败, ");
         }
         // 成功返回 200, 否则返回 500 并抛出异常
         // ...

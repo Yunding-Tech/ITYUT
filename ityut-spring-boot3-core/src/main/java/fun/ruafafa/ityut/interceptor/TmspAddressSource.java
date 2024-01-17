@@ -2,32 +2,28 @@ package fun.ruafafa.ityut.interceptor;
 
 import com.dtflys.forest.callback.AddressSource;
 import com.dtflys.forest.http.ForestAddress;
-import com.dtflys.forest.http.ForestBody;
 import com.dtflys.forest.http.ForestRequest;
-import com.dtflys.forest.http.ForestRequestBody;
-import com.dtflys.forest.http.body.ObjectRequestBody;
-import fun.ruafafa.ityut.dto.LoginUser;
-import fun.ruafafa.ityut.manager.AutoHostManager;
+import fun.ruafafa.ityut.manager.ITyutAutoHostManager;
 import jakarta.annotation.Resource;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
-@DependsOn({"autoHostManager"})
+@Log4j2
 @Component
+@DependsOn({"iTyutAutoHostManager"})
 public class TmspAddressSource implements AddressSource {
 
     @Resource
-    private AutoHostManager autoHostManager;
+    private ITyutAutoHostManager ITyutAutoHostManager;
 
     @Override
     public ForestAddress getAddress(ForestRequest req) {
-        String address = autoHostManager.autoChooseAddress();
+        String address = ITyutAutoHostManager.autoChooseAddress();
         if (address == null) {
             throw new RuntimeException("无可用节点!!!");
         }
-        System.out.println("当前节点：" + address);
+        log.info("[ITYUT] 当前节点: {}", address);
         return new ForestAddress(address, 80);
     }
 
