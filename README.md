@@ -64,6 +64,7 @@ ITyutUtil.logout("USER_ACCOUNT");
 当您登录成功后，就可以使用其他功能了
 
 ## 功能
+通过ITyutUtil或者其代理对象的Api,您可以做到:
 - [x] 登录
 - [x] 登出
 - [x] 获取GPA等
