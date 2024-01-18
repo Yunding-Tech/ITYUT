@@ -3,17 +3,21 @@ package fun.ruafafa.ityut.manager;
 
 import com.dtflys.forest.http.ForestResponse;
 import fun.ruafafa.ityut.client.AddressClient;
+import fun.ruafafa.ityut.constant.LoginConstant;
 import jakarta.annotation.Resource;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Log4j2
 @RequiredArgsConstructor
-@Setter
+@Component("iTyutAutoHostManager")
+@Data
 public class ITyutAutoHostManager {
 
     @Resource
@@ -22,7 +26,8 @@ public class ITyutAutoHostManager {
     /**
      * 节点列表
      */
-    List<String> nodes;
+    List<String> nodes = List.of(LoginConstant.IP_RUAFAFA, LoginConstant.DOMAIN_RUAFAFA,
+            LoginConstant.DOMAIN_AUTHORITY_1, LoginConstant.DOMAIN_AUTHORITY_2);
 
     /**
      * 自动选择节点

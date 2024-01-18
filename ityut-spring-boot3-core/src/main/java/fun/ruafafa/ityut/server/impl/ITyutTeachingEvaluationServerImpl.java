@@ -43,7 +43,6 @@ public class ITyutTeachingEvaluationServerImpl implements fun.ruafafa.ityut.serv
             tasks.add(() -> {
                 // 处理已评教的课程
                 String s = doPages(account, info);
-                System.out.println(s);
                 if (!"是".equals(info.getIsEvaluated()))
                     return doPages(account, info);
                 return finalI + ". 已评教";

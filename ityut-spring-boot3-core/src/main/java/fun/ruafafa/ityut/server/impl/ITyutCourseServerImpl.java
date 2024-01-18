@@ -9,6 +9,10 @@ import fun.ruafafa.ityut.constant.RequestConstant;
 import fun.ruafafa.ityut.dto.CourseInfo;
 import fun.ruafafa.ityut.server.ITyutCourseServer;
 import jakarta.annotation.Resource;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -27,10 +31,28 @@ public class ITyutCourseServerImpl implements ITyutCourseServer {
     private TmspCourseClient courseClient;
 
     @Override
-    public String getClassScheduleBySemester(String account) {
+    public Map<String, String> getSemester(String account) {
         String courseScheduleHTML = courseClient.getCourseScheduleHTML(account);
-        System.out.println(courseScheduleHTML);
-        return null;
+        Map<String, String> semesterMap = new HashMap<>();
+
+        // 使用Jsoup解析HTML
+        Document document = Jsoup.parse(courseScheduleHTML);
+
+        // 选择学年学期的select元素
+        Element selectElement = document.getElementById("Zxjxjhh");
+
+        if (selectElement != null) {
+            // 获取所有的option元素
+            Elements optionElements = selectElement.select("option");
+
+            // 遍历option元素并提取value和text，并存入Map中
+            for (Element optionElement : optionElements) {
+                String value = optionElement.attr("value");
+                String text = optionElement.text();
+                semesterMap.put(text, value);
+            }
+        }
+        return semesterMap;
     }
     @Override
     public List<CourseInfo> getCourseListAtCurrentSemester(String account) {
@@ -39,15 +61,21 @@ public class ITyutCourseServerImpl implements ITyutCourseServer {
         JSONArray rows = jsonObject.getJSONArray("rows");
         return rows.toJavaList(CourseInfo.class);
     }
+
     @Override
-    public List<CourseInfo> getCourseInfoByClassNumber(String account, String classNumber) {
+    public List<CourseInfo> getCourseInfo(String account, String classNumber) {
+        return getCourseInfo(account, "", classNumber);
+    }
+
+    @Override
+    public List<CourseInfo> getCourseInfo(String account, String semester, String classNumber) {
         Map<String, Object> paginationArr = new HashMap<>(RequestConstant.PAGINATION_ARRAY);
         Map<String, Object> pagination = new HashMap<>(RequestConstant.PAGINATION);
 
-        setParam(classNumber, paginationArr, pagination);
+        setParam(semester, classNumber, paginationArr, pagination);
 
-        String jsonSchedule = courseClient.getCouresScheduleByClassNumber(account, paginationArr);
-        String jsonDetails = courseClient.getCouresDetailsByClassNumber(account, pagination);
+        String jsonSchedule = courseClient.getCouresSchedule(account, paginationArr);
+        String jsonDetails = courseClient.getCouresDetails(account, pagination);
         List<CourseInfo> schedules = getList(jsonSchedule);
         List<CourseInfo> details = getList(jsonDetails);
 
@@ -95,10 +123,11 @@ public class ITyutCourseServerImpl implements ITyutCourseServer {
                 i.getWeek());
     }
 
-    private static void setParam(String classNumber, Map<String, Object> paginationArr, Map<String, Object> pagination) {
-        paginationArr.put("pagination[conditionJson]", "{bjh:'" + classNumber + "'}");
+    private static void setParam(String semester, String classNumber, Map<String, Object> paginationArr, Map<String, Object> pagination) {
+        String json = StrUtil.format("{'zxjxjhh':'{}','bjh':'{}'}", semester, classNumber);
+        paginationArr.put("pagination[conditionJson]", json);
         paginationArr.put("pagination[sort]", "kch,kxh");
-        pagination.put("conditionJson", "{bjh:'" + classNumber + "'}");
+        pagination.put("conditionJson", json);
         pagination.put("sort", "kch,kxh");
     }
 

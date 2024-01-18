@@ -32,18 +32,16 @@ public class ITyutAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public ITyutAutoHostManager iTyutAutoHostManager() {
-        List<String> defaultNodes = List.of(LoginConstant.IP_RUAFAFA, LoginConstant.DOMAIN_RUAFAFA,
-                LoginConstant.DOMAIN_AUTHORITY_1, LoginConstant.DOMAIN_AUTHORITY_2);
         List<String> customNodes = properties.getCustomNodes();
-        ITyutAutoHostManager ITyutAutoHostManager = new ITyutAutoHostManager();
+        ITyutAutoHostManager ma = new ITyutAutoHostManager();
         if (customNodes != null) {
-            customNodes.addAll(defaultNodes);
-            ITyutAutoHostManager.setNodes(customNodes);
-            return ITyutAutoHostManager;
-        } else {
-            ITyutAutoHostManager.setNodes(defaultNodes);
-            return ITyutAutoHostManager;
+            // 自定义优先
+            List<String> nodes = ma.getNodes();
+            customNodes.addAll(nodes);
+            ma.setNodes(customNodes);
+            return ma;
         }
+        return ma;
     }
 
 }

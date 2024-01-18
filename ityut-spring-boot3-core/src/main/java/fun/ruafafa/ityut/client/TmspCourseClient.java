@@ -44,7 +44,7 @@ public interface TmspCourseClient {
             headers = {"X-Requested-With: XMLHttpRequest"},
             readTimeout = 10000
     )
-    String getCouresScheduleByClassNumber(String account, @Body Map<String, Object> data);
+    String getCouresSchedule(String account, @Body Map<String, Object> data);
 
     @Post (
             url = "/Tresources/A1Xskb/GetPageListJson2",
@@ -53,7 +53,7 @@ public interface TmspCourseClient {
             headers = {"X-Requested-With: XMLHttpRequest"},
             readTimeout = 10000
     )
-    String getCouresDetailsByClassNumber(String account, @Body Map<String, Object> data);
+    String getCouresDetails(String account, @Body Map<String, Object> data);
 
 
     @Post (
