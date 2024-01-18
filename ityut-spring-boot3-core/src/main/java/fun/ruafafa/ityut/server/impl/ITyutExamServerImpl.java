@@ -3,6 +3,7 @@ package fun.ruafafa.ityut.server.impl;
 import com.dtflys.forest.http.ForestResponse;
 import fun.ruafafa.ityut.client.TmspExamClient;
 import fun.ruafafa.ityut.constant.RequestConstant;
+import fun.ruafafa.ityut.dto.CourseGrade;
 import fun.ruafafa.ityut.dto.ExamInfo;
 import fun.ruafafa.ityut.server.ITyutExamServer;
 import jakarta.annotation.Resource;
@@ -49,4 +50,5 @@ public class ITyutExamServerImpl implements ITyutExamServer {
 
         return examList;
     }
+
 }

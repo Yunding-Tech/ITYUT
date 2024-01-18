@@ -52,7 +52,9 @@ public class ITyutUtil{
         return iTyutStudentServer.getStudentInfo(account);
     }
 
-
+    public static List<CourseGrade> getCourseGrade(String account) {
+        return iTyutStudentServer.getCourseGrade(account);
+    }
     public static String getTeachingBuildingJSON(String account, TyutCampus campus) {
         return iTyutItergratedService.getTeachBuildingJson(account, campus);
     }

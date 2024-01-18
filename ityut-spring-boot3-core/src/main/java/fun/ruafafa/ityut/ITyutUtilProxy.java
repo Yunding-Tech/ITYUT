@@ -33,6 +33,9 @@ public class ITyutUtilProxy {
         return ITyutUtil.getStudentInfo(account);
     }
 
+    public List<CourseGrade> getCourseGrade() {
+        return ITyutUtil.getCourseGrade(account);
+    }
 
     public String getTeachingBuildingJSON(TyutCampus campus) {
         return ITyutUtil.getTeachingBuildingJSON(account, campus);

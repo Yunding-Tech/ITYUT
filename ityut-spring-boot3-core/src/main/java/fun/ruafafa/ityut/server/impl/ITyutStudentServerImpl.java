@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSON;
 import com.dtflys.forest.annotation.NotNull;
 import fun.ruafafa.ityut.annotation.TmspConvert;
 import fun.ruafafa.ityut.client.TmspStudentServerClient;
+import fun.ruafafa.ityut.dto.CourseGrade;
 import fun.ruafafa.ityut.dto.GradeReport;
 import fun.ruafafa.ityut.dto.StudentInfo;
 import fun.ruafafa.ityut.server.ITyutStudentServer;
@@ -20,7 +21,9 @@ import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Component
 public class ITyutStudentServerImpl implements ITyutStudentServer {
@@ -95,5 +98,35 @@ public class ITyutStudentServerImpl implements ITyutStudentServer {
             }
         }
         return bean;
+    }
+    @Override
+    public List<CourseGrade> getCourseGrade(String account) {
+        String html = tarClient.getHistoryGradeHTML(account);
+
+        List<CourseGrade> courseGrades = new ArrayList<>();
+
+        Document document = Jsoup.parse(html);
+
+        Elements rows = document.select("table tr:has(td)");
+
+        for (Element row : rows) {
+            Elements columns = row.select("td");
+
+            String courseCode = columns.get(0).text();
+            String courseName = columns.get(2).text();
+            String englishCourseName = columns.get(3).text();
+            double credit = Double.parseDouble(columns.get(4).text());
+            String courseAttribute = columns.get(5).text();
+            String examTime = columns.get(6).text();
+            int score = Integer.parseInt(columns.get(7).text());
+            String notPassedReason = columns.get(8).text();
+
+            CourseGrade courseGrade = new CourseGrade(courseCode, courseName, englishCourseName,
+                    credit, courseAttribute, examTime, score, notPassedReason);
+
+            courseGrades.add(courseGrade);
+        }
+
+        return courseGrades;
     }
 }

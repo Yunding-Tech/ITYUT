@@ -22,6 +22,7 @@ public interface TmspStudentServerClient {
     @Body("GET_COURSE_SCORE_REQUEST_DATA")
     String getTotalGradeHTML(String account);
 
+
     @Post (
             url = "/Tschedule/C6Cjgl/GetKccjResult",
             contentType = "application/x-www-form-urlencoded",
