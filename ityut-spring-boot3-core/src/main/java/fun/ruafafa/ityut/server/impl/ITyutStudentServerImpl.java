@@ -111,20 +111,21 @@ public class ITyutStudentServerImpl implements ITyutStudentServer {
 
         for (Element row : rows) {
             Elements columns = row.select("td");
+            if (columns.size() == 9) {  // 确保列数正确
+                String courseCode = columns.get(0).text();
+                String courseName = columns.get(2).text();
+                String englishCourseName = columns.get(3).text();
+                double credit = Double.parseDouble(columns.get(4).text());
+                String courseAttribute = columns.get(5).text();
+                String examTime = columns.get(6).text();
+                int score = Integer.parseInt(columns.get(7).text());
+                String notPassedReason = columns.get(8).text();
 
-            String courseCode = columns.get(0).text();
-            String courseName = columns.get(2).text();
-            String englishCourseName = columns.get(3).text();
-            double credit = Double.parseDouble(columns.get(4).text());
-            String courseAttribute = columns.get(5).text();
-            String examTime = columns.get(6).text();
-            int score = Integer.parseInt(columns.get(7).text());
-            String notPassedReason = columns.get(8).text();
+                CourseGrade courseGrade = new CourseGrade(courseCode, courseName, englishCourseName,
+                        credit, courseAttribute, examTime, score, notPassedReason);
 
-            CourseGrade courseGrade = new CourseGrade(courseCode, courseName, englishCourseName,
-                    credit, courseAttribute, examTime, score, notPassedReason);
-
-            courseGrades.add(courseGrade);
+                courseGrades.add(courseGrade);
+            }
         }
 
         return courseGrades;
