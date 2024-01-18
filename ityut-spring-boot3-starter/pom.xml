@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>ityut-spring-boot3-starter</artifactId>
-    <version>${parent.version}</version>
+    <version>${project.parent.version}</version>
     <name>ityut-spring-boot3-starter</name>
     <description>ityut-spring-boot3-starter</description>
     <properties>

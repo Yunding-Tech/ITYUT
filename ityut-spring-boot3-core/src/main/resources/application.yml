@@ -1,0 +1,3 @@
+forest:
+  ## 日志总开关，打开/关闭Forest请求/响应日志（默认为 true）
+  log-enabled: false

@@ -6,10 +6,11 @@ import com.dtflys.forest.http.ForestRequest;
 import fun.ruafafa.ityut.manager.ITyutAutoHostManager;
 import jakarta.annotation.Resource;
 import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
-@Log4j2
+@Slf4j
 @Component
 @DependsOn({"iTyutAutoHostManager"})
 public class TmspAddressSource implements AddressSource {
@@ -23,7 +24,6 @@ public class TmspAddressSource implements AddressSource {
         if (address == null) {
             throw new RuntimeException("无可用节点!!!");
         }
-        log.info("[ITYUT] 当前节点: {}", address);
         return new ForestAddress(address, 80);
     }
 

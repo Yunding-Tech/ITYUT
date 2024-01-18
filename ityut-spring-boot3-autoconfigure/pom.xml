@@ -11,7 +11,7 @@
     <packaging>jar</packaging>
 
     <artifactId>ityut-spring-boot3-autoconfigure</artifactId>
-    <version>${parent.version}</version>
+    <version>${project.parent.version}</version>
     <name>ityut-spring-boot3-autoconfigure</name>
     <description>ityut-spring-boot3-autoconfigure</description>
     <properties>

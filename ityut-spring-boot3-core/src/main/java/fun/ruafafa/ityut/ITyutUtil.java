@@ -14,7 +14,6 @@ import java.util.Map;
 public class ITyutUtil{
 
     private static ITyutUserManager iTyutUserManager = null;
-    private static ITyutService iTyutService = null;
     private static ITyutCourseServer iTyutCourseServer = null;
     private static ITyutExamServer iTyutExamServer = null;
     private static ITyutItergratedService iTyutItergratedService = null;
@@ -30,6 +29,10 @@ public class ITyutUtil{
     public static ITyutUtilProxy login(String account, String password) {
         iTyutUserManager.login(account, password);
         return new ITyutUtilProxy(account);
+    }
+
+    public static boolean isLogin(String account) {
+        return iTyutUserManager.isLogin(account);
     }
 
     /**
@@ -54,8 +57,8 @@ public class ITyutUtil{
         return iTyutItergratedService.getTeachBuildingJson(account, campus);
     }
 
-    public static String oneClickEvaluation(String account) {
-        return iTyutTeachingEvaluationServer.oneClickEvaluation(account);
+    public static void oneClickEvaluation(String account) {
+        iTyutTeachingEvaluationServer.oneClickEvaluation(account);
     }
 
     public static List<TeachBuilding> getTeachingBuilding(String account, TyutCampus campus) {
@@ -79,16 +82,14 @@ public class ITyutUtil{
     }
 
     public static void logout(String account) {
-        // ...
+        iTyutUserManager.logout(account);
+        return ;
     }
     @Autowired
-    public ITyutUtil(ITyutUserManager iTyutUserManager, ITyutService iTyutService,
-                     ITyutCourseServer iTyutCourseServer, ITyutExamServer iTyutExamServer,
-                     ITyutStudentServer iTyutStudentServer,
-                     ITyutItergratedService iTyutItergratedService,
-                     ITyutTeachingEvaluationServer iTyutTeachingEvaluationServer) {
+    public ITyutUtil(ITyutUserManager iTyutUserManager, ITyutCourseServer iTyutCourseServer,
+                     ITyutExamServer iTyutExamServer, ITyutStudentServer iTyutStudentServer,
+                     ITyutItergratedService iTyutItergratedService, ITyutTeachingEvaluationServer iTyutTeachingEvaluationServer) {
         ITyutUtil.iTyutUserManager = iTyutUserManager;
-        ITyutUtil.iTyutService = iTyutService;
         ITyutUtil.iTyutCourseServer = iTyutCourseServer;
         ITyutUtil.iTyutExamServer = iTyutExamServer;
         ITyutUtil.iTyutStudentServer = iTyutStudentServer;

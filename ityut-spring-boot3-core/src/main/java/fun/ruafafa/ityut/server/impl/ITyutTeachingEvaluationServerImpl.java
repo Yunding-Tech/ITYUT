@@ -9,6 +9,7 @@ import fun.ruafafa.ityut.dto.PjrsPagination;
 import fun.ruafafa.ityut.dto.TeachEvaluationPaper;
 import fun.ruafafa.ityut.dto.TeachEvaluationQuestion;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.*;
+@Slf4j
 @Component
 public class ITyutTeachingEvaluationServerImpl implements fun.ruafafa.ityut.server.ITyutTeachingEvaluationServer {
 
@@ -25,7 +27,7 @@ public class ITyutTeachingEvaluationServerImpl implements fun.ruafafa.ityut.serv
     private TmspTeachingEvaluationClient tteClient;
 
     @Override
-    public String oneClickEvaluation(String account) {
+    public void oneClickEvaluation(String account) {
         // 获取评教列表
         tteClient.getPjToken(account);
         String pjrsjPageListJson = tteClient.getPjrsjPageListJson(account, new PjrsPagination());
@@ -42,15 +44,18 @@ public class ITyutTeachingEvaluationServerImpl implements fun.ruafafa.ityut.serv
             int finalI = i;
             tasks.add(() -> {
                 // 处理已评教的课程
-                String s = doPages(account, info);
-                if (!"是".equals(info.getIsEvaluated()))
-                    return doPages(account, info);
-                return finalI + ". 已评教";
+                if (!"是".equals(info.getIsEvaluated())) {
+                    String returnJson = doPages(account, info);
+                    log.debug(returnJson);
+                    return  finalI + ".[尝试评教结束]\t" + info.getCourseName();
+                }
+                return finalI + ".[跳过已经评教]\t" + info.getCourseName();
             });
         }
         // 执行任务
         List<Future<String>> futures = null;
         try {
+            log.info("--------------------开始评教--------------------");
             futures = executorService.invokeAll(tasks);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -60,16 +65,22 @@ public class ITyutTeachingEvaluationServerImpl implements fun.ruafafa.ityut.serv
         for (Future<String> future : futures) {
             try {
                 String result = future.get();
-                System.out.println(result);
+                log.info(result);
                 // 处理结果...
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
                 throw new RuntimeException("评教执行失败");
             }
         }
+        // 评教结果
+        log.info("--------------------评教结果--------------------");
+        for (int i = 0; i < taskNum; i++) {
+            JSONObject courseObject = rows.getJSONObject(i);
+            TeachEvaluationPaper info = courseObject.toJavaObject(TeachEvaluationPaper.class);
+            log.info(i + ".[是否评教]\t" + info.getIsEvaluated() + "\t" + info.getCourseName());
+        }
         // 关闭线程池
         executorService.shutdown();
-        return null;
     }
 
     public void autoWriteAnwser(TeachEvaluationQuestion question) {
@@ -91,9 +102,6 @@ public class ITyutTeachingEvaluationServerImpl implements fun.ruafafa.ityut.serv
      * @throws Exception
      */
     String doPages(String account, TeachEvaluationPaper info) throws InterruptedException {
-//        System.out.println("-------------------");
-//        System.out.println(info.getPaperCode());
-//        System.out.println("-------------------");
         List<TeachEvaluationQuestion> questions = tteClient.getTreeJson(account, info.getPaperCode());
         for (TeachEvaluationQuestion question : questions) {
             BeanUtil.copyProperties(info, question);

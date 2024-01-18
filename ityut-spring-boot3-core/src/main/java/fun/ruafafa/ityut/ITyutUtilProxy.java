@@ -17,6 +17,10 @@ public class ITyutUtilProxy {
         this.account = account;
     }
 
+    public boolean isLogin() {
+        return ITyutUtil.isLogin(account);
+    }
+
     public Map<String, String> getSemester() {
         return ITyutUtil.getSemester(account);
     }
@@ -38,8 +42,8 @@ public class ITyutUtilProxy {
         return ITyutUtil.getTeachingBuilding(account,campus);
     }
 
-    public String onClickEvaluation() {
-        return ITyutUtil.oneClickEvaluation(account);
+    public void onClickEvaluation() {
+        ITyutUtil.oneClickEvaluation(account);
     }
 
     public List<ExamInfo> getExamSchedule() {
@@ -58,7 +62,7 @@ public class ITyutUtilProxy {
         return ITyutUtil.getCourse(account, semester, classNumber);
     }
 
-    public static void logout(String account) {
-        // ...
+    public void logout() {
+        ITyutUtil.logout(account);
     }
 }
