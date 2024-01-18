@@ -2,13 +2,13 @@
 <h4 align="center">一个用于连接TYUT并获取相关信息的开发工具</h4>
 
 <p align="center">
-    <a href="https://opensource.org/licenses/mit-license.php">
+    <a href="https://opensource.org/licenses/mit-license.php"> 
         <img src="https://img.shields.io/github/license/ruafafa/ITYUT" alt="License">
     </a>
     <a href="https://www.oracle.com/java/technologies/javase/javase-jdk17-downloads.html">
         <img src="https://img.shields.io/badge/JDK-17+-green" alt="jdk">
     </a>
-    <a href="https://spring.io/projects/spring-boot/">
+    <a href="https://spring.io/projects/spring-boot/"> 
         <img src="https://img.shields.io/badge/Springboot3+-green" alt="springboot">
     </a>
 </p>
@@ -36,20 +36,20 @@
     <dependency>
       <groupId>fun.ruafafa</groupId>
       <artifactId>ityut-spring-boot3-starter</artifactId>
-      <version>1.1</version>
+      <version>1.1</version> 
     </dependency>
 ```
 
 ## 基本使用
-ITYUT的使用十分简单，以登录为例，您只需要：
+ITYUT 的使用十分简单，以登录为例，您只需要：
 ```java
 ITyutUtil.login("YOUR_ACCOUNT", "YOUR_PASSWORD");
 ```
 即可完成登录，您可以在登录后使用：
 ```java
-ITyutUtil.isLogin("YOUR_ACCOUNT");
+ITyutUtil.isLogin("YOUR_ACCOUNT"); 
 ```
-该方法将返回一个布尔值，用于判断是否登录成功，当然，您可能会觉得每次都需要传入账号密码十分麻烦，您可以使用提供的代理类来接收login返回的结果，并使用代理类来完成ITyutUtil能完成的所有功能（除登录外）：
+该方法将返回一个布尔值，用于判断是否登录成功，当然，您可能会觉得每次都需要传入账号密码十分麻烦，您可以使用提供的代理类来接收 login 返回的结果，并使用代理类来完成 ITyutUtil 能完成的所有功能（除登录外）：
 ```java
 ITyutUtilProxy user = ITyutUtil.login("YOUR_ACCOUNT", "YOUR_PASSWORD");
 user.isLogin();
@@ -64,7 +64,7 @@ ITyutUtil.logout("USER_ACCOUNT");
 当您登录成功后，就可以使用其他功能了
 
 ## 功能
-通过ITyutUtil或者其代理对象的Api,您可以做到:
+通过 ITyutUtil 或者其代理对象的 Api,您可以做到:
 - [x] 登录
 - [x] 登出
 - [x] 获取GPA等
@@ -80,7 +80,7 @@ ITyutUtil.logout("USER_ACCOUNT");
 
 
 ## 自动配置
-当前版本默认引入了4个访问节点，其中 [Ruafafa-JWC](http://8.141.9.52)  节点无需连接校园网即可使用，其余节点需要自行连接TYUT校园网使用，不用就保证节点可用性，
+当前版本默认引入了 4 个访问节点，其中 [Ruafafa-JWC](http://8.141.9.52)  节点无需连接校园网即可使用，其余节点需要自行连接TYUT校园网使用，不用就保证节点可用性，
 一些默认节点可能会在后续版本中被修改或删除，如果您需要使用其他节点，请参考
 下文引入自定义节点，您引入的节点将被优先选择
 
